@@ -36,6 +36,7 @@ exports.getIndex = (req, res, next) => {
 exports.addToCart = (req, res, next) => {
     const productId = req.body.productId;
     Product.findById(productId, (product) => {
+        console.log(product);
         Cart.addProduct(productId, product.price);
     });
     res.redirect("/cart");
