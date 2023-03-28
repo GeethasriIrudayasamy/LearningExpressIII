@@ -16,10 +16,10 @@ exports.getProducts = (req, res, next) => {
 exports.getProductDetail = (req, res, next) => {
     const productId = req.params.productId;
 
-    Product.findById(productId).then(([rows, fields]) => {
+    Product.findByPk(productId).then((product) => {
         res.render("shop/product-detail", {
-            product: rows[0],
-            pageTitle: rows[0].title,
+            product: product,
+            pageTitle: product.title,
             path: "/products",
         });
     });
@@ -39,9 +39,9 @@ exports.getIndex = (req, res, next) => {
 
 exports.addToCart = (req, res, next) => {
     const productId = req.body.productId;
-    Product.findById(productId)
-        .then(([rows, fields]) => {
-            console.log(rows);
+    Product.findByPk(productId)
+        .then((product) => {
+            console.log(product);
         })
         .catch((err) => {
             console.log(err);
